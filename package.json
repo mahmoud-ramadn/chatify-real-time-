@@ -2,6 +2,9 @@
   "name": "chat-app-realtime-with-socket",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "build": "npm install --prefix backEnd && npm install --prefix frontEnd && npm run build --prefix frontEnd",
     "start": "npm run start --prefix backEnd"
