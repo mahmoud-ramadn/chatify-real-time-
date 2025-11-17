@@ -1,3 +1,5 @@
+import ar from "../lib/arcjet.js";
+
 export const arcjetProtection = async (req, res, next) => {
   try {
     const decision = await ar.protect(req);
