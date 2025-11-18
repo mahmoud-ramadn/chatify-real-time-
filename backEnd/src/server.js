@@ -14,12 +14,19 @@ const __dirname = path.resolve();
 const PORT = ENV.PORT || 3000;
 
 app.use(express.json());
+const allowedOrigins = ENV.CLIENT_URL.split(",").map((o) => o.trim());
+
 app.use(
   cors({
-    origin: ENV.CLIENT_URL,
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // allow requests with no origin
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
 );
+
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
