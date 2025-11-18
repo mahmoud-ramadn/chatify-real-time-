@@ -15,10 +15,15 @@ const PORT = ENV.PORT || 3000;
 
 app.use(express.json());
 app.use(
-  cors({ origin:ENV.CLIENT_URL , credentials: true })
+  cors({
+    origin: "https://chatify-real-time-urcmv.sevalla.app",
+    credentials: true,
+  })
 );
 app.use(cookieParser());
-
+app.get("/", (req, res) => {
+  res.send({ message: "hello on my server" });
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
