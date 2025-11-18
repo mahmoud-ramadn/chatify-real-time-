@@ -15,7 +15,7 @@ const messageSchema = new mongoose.Schema(
     text: {
       type: String,
       trim: true,
-      maxLength: 2000,
+      maxlength: 2000,
     },
     image: {
       type: String,
@@ -23,6 +23,14 @@ const messageSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+messageSchema.pre("validate", function (next) {
+  if (!this.text && !this.image) {
+    next(new Error("Message must contain either text or image"));
+  } else {
+    next();
+  }
+});
 
 const Message = mongoose.model("Message", messageSchema);
 

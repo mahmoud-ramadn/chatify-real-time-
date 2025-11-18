@@ -30,6 +30,8 @@ export const arcjetProtection = async (req, res, next) => {
     next();
   } catch (error) {
     console.log("Arcjet Protection Error:", error);
-    next();
+    return res.status(503).json({
+      message: "Security check temporarily unavailable. Please try again.",
+    });
   }
 };
