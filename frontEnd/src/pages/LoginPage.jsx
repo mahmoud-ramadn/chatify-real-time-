@@ -1,6 +1,3 @@
-
 export default function LoginPage() {
-  return (
-    <div className=" font -botd ">LoginPage</div>
-  )
+  return <div className="font-bold">LoginPage</div>;
 }
