@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 
 const mouseClickSound = new Audio("/sounds/mouse-click.mp3");
 
-function ProfileHeader() {
+export default function ProfileHeader() {
   const { logout, authUser, updateProfile } = useAuthStore();
   const { isSoundEnabled, toggleSound } = useChatStore();
   const [selectedImg, setSelectedImg] = useState(null);
@@ -17,13 +17,10 @@ function ProfileHeader() {
     if (!file) return;
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    console.log(reader);
-
     reader.onloadend = async () => {
       try {
         const base64Image = reader.result;
         setSelectedImg(base64Image);
-
         await updateProfile({ profilePic: base64Image });
       } catch (error) {
         toast.error("File size too large with new one some small");
@@ -32,54 +29,52 @@ function ProfileHeader() {
   };
 
   return (
-    <div className="p-6 border-b border-slate-700/50">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          {/* AVATAR */}
-          <div className="avatar online">
+    <div className="p-3 sm:p-4 lg:p-6 border-b border-slate-700/50 bg-gradient-to-r from-slate-800/50 to-slate-900/50">
+      <div className="flex items-center justify-between gap-2">
+        {/* Avatar & User Info */}
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+          <div className="relative">
             <button
-              className="size-14 rounded-full overflow-hidden relative group"
+              className="relative size-12 sm:size-14 lg:size-16 rounded-full overflow-hidden group flex-shrink-0 ring-2 ring-cyan-500/30 hover:ring-cyan-400/50 transition-all duration-300"
               onClick={() => fileInputRef?.current.click()}
             >
               <img
-                src={selectedImg || authUser?.profilePic || "/avatar.png"}
-                alt="User image"
-                className="size-full object-cover"
+                src={
+                  selectedImg ||
+                  authUser?.profilePic ||
+                  "/api/placeholder/64/64"
+                }
+                alt="User"
+                className="size-full object-cover transition-transform duration-300 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                <span className="text-white text-xs">Change</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 flex items-end justify-center pb-2 transition-opacity duration-300">
+                <span className="text-white text-[10px] sm:text-xs font-medium">
+                  Change
+                </span>
               </div>
             </button>
-
             <input
               type="file"
               ref={fileInputRef}
               onChange={handleImageUpload}
+              accept="image/*"
               className="hidden"
             />
           </div>
 
-          {/* USERNAME & ONLINE TEXT */}
-          <div>
-            <h3 className="text-slate-200 font-medium text-base max-w-[180px] truncate">
+          <div className="min-w-0 flex-1">
+            <h3 className="text-slate-100 font-semibold text-sm sm:text-base lg:text-lg truncate">
               {authUser?.fullName}
             </h3>
-
-            <p className="text-slate-400 text-xs">Online</p>
+            <p className="text-green-400 text-xs sm:text-sm flex items-center gap-1">
+              <span className="size-1.5 bg-green-400 rounded-full animate-pulse" />
+              Online
+            </p>
           </div>
         </div>
 
-        {/* BUTTONS */}
-        <div className="flex gap-4 items-center">
-          {/* LOGOUT BTN */}
-          <button
-            className="text-slate-400 hover:text-slate-200 transition-colors"
-            onClick={logout}
-          >
-            <LogOutIcon className="size-5" />
-          </button>
-
-          {/* SOUND TOGGLE BTN */}
+        {/* Action Buttons */}
+        <div className="flex gap-1.5 sm:gap-2 lg:gap-3 items-center flex-shrink-0">
           <button
             className="text-slate-400 hover:text-slate-200 transition-colors"
             onClick={() => {
@@ -97,9 +92,16 @@ function ProfileHeader() {
               <VolumeOffIcon className="size-5" />
             )}
           </button>
+
+          <button
+            className="p-2 sm:p-2.5 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-all duration-300 active:scale-95"
+            onClick={logout}
+            title="Logout"
+          >
+            <LogOutIcon className="size-4 sm:size-5" />
+          </button>
         </div>
       </div>
     </div>
   );
 }
-export default ProfileHeader;
