@@ -12,7 +12,7 @@ export default function ChatPage() {
   const { activeTab, selectedUser, setSelectedUser } = useChatStore();
 
   return (
-    <div className="relative w-full max-w-6xl md:h-[800px] h-screen mx-auto">
+    <div className="relative w-full max-w-6xl md:h-[800px] min-h-screen mx-auto">
       <BorderAnimatedContainer>
         {/* LEFT SIDE - Hidden on mobile when chat is selected */}
         <div

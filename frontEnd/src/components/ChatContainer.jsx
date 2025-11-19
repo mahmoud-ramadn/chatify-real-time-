@@ -68,7 +68,7 @@ function ChatContainer() {
 
   return (
     // Fixed: Use h-screen on mobile and proper height management
-    <div className="flex flex-col h-full md:h-screen w-full bg-slate-900">
+    <div className="flex flex-col h-screen w-full bg-slate-900">
       <ChatHeader />
 
       {/* Fixed: Better mobile scrolling container */}
