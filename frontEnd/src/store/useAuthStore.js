@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 const BASE_URL =
   import.meta.env.MODE === "development"
     ? "http://localhost:3000"
-    : "/api";
+    : import.meta.env.VITE_BASE_URL || "";
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
