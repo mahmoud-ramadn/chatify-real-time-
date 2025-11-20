@@ -42,7 +42,7 @@ export default function ProfileHeader() {
                 src={
                   selectedImg ||
                   authUser?.profilePic ||
-                  "/api/placeholder/64/64"
+                  "/avatar.png"
                 }
                 alt="User"
                 className="size-full object-cover transition-transform duration-300 group-hover:scale-110"
