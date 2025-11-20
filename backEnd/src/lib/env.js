@@ -1,10 +1,5 @@
 import "dotenv/config";
 
-if (!process.env.CLIENT_URL) {
-  throw new Error(
-    "CLIENT_URL environment variable is required for CORS configuration"
-  );
-}
 export const ENV = {
   PORT: process.env.PORT,
   JWT_SECRET: process.env.JWT_SECRET,
@@ -20,3 +15,4 @@ export const ENV = {
   ARCJET_KEY: process.env.ARCJET_KEY,
   ARCJET_ENV: process.env.ARCJET_ENV,
 };
+

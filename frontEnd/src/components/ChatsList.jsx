@@ -52,7 +52,7 @@ export function UserListItem({ user, isOnline, onClick }) {
 export default function ChatsList() {
   const { getMyChatPartners, chats, isUsersLoading, setSelectedUser } =
     useChatStore();
-  const { onlineUsers } = useAuthStore();
+  const { onlineUsers} = useAuthStore();
 
   useEffect(() => {
     getMyChatPartners();
@@ -66,7 +66,8 @@ export default function ChatsList() {
       {chats.map((chat) => (
         <div
           key={chat?._id}
-          className="bg-cyan-500/10 p-3 md:p-4 rounded-lg cursor-pointer hover:bg-cyan-500/20 transition-colors active:bg-cyan-500/30"
+          className="bg-cyan-500/10 p-3 md:p-4 rounded-lg cursor-pointer
+           hover:bg-cyan-500/20 transition-colors active:bg-cyan-500/30"
           onClick={() => setSelectedUser(chat)}
         >
           <div className="flex items-center gap-3">
